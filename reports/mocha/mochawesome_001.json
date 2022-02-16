@@ -1,0 +1,145 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-01-10T12:42:00.417Z",
+    "end": "2022-01-10T12:42:29.730Z",
+    "duration": 29313,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "dafcd5bf-a7a8-4881-8a86-4e2cfbe6b834",
+      "title": "",
+      "fullFile": "cypress/integration/landing_page.spec.js",
+      "file": "cypress/integration/landing_page.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "3b9010c3-4663-481e-a4e2-4270985de9cd",
+          "title": "Landing page functionalities",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "can log into the application",
+              "fullTitle": "Landing page functionalities can log into the application",
+              "timedOut": null,
+              "duration": 16420,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.login({\n  username: 'RWilliams',\n  password: '!?Rwilliams2020'\n});\ncy.xpath('//a[contains(text(), \"Log off\")]').should('be.visible');",
+              "err": {},
+              "uuid": "71cf41e3-5d34-4bf9-b964-d010243d7d86",
+              "parentUUID": "3b9010c3-4663-481e-a4e2-4270985de9cd",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "nav bar should have 7 links when user is logged in",
+              "fullTitle": "Landing page functionalities nav bar should have 7 links when user is logged in",
+              "timedOut": null,
+              "duration": 929,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.navbar-nav').children().should('have.length', 5);",
+              "err": {},
+              "uuid": "2752f9c2-b458-4db3-adb5-7cf1dde54732",
+              "parentUUID": "3b9010c3-4663-481e-a4e2-4270985de9cd",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "can click all links in the nav bar",
+              "fullTitle": "Landing page functionalities can click all links in the nav bar",
+              "timedOut": null,
+              "duration": 11815,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const links = ['About Warden', 'Search', 'Manage Data'];\nlinks.forEach(link => {\n  cy.contains(link).then(link => {\n    cy.request(link.prop('href')).its('status').should('eq', 200);\n  });\n});",
+              "err": {},
+              "uuid": "9bc36944-1761-4ac0-9032-be5d294ca984",
+              "parentUUID": "3b9010c3-4663-481e-a4e2-4270985de9cd",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "71cf41e3-5d34-4bf9-b964-d010243d7d86",
+            "2752f9c2-b458-4db3-adb5-7cf1dde54732",
+            "9bc36944-1761-4ac0-9032-be5d294ca984"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 29164,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.2.1"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/reports/mocha",
+        "quite": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "5.1.0"
+    }
+  }
+}

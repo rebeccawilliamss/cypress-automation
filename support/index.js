@@ -1,0 +1,47 @@
+// ***********************************************************
+// This example support/index.js is processed and
+// loaded automatically before your test files.
+//
+// This is a great place to put global configuration and
+// behavior that modifies Cypress.
+//
+// You can change the location of this file or turn off
+// automatically serving support files with the
+// 'supportFile' configuration option.
+//
+// You can read more here:
+// https://on.cypress.io/configuration
+// ***********************************************************
+
+// Import commands.js using ES2015 syntax:
+import './commands'
+import 'cypress-axe'
+require('cypress-xpath')
+require('cypress-get-table')
+
+Cypress.on('uncaught:exception', (err, runnable) => {
+    // returning false here prevents Cypress from
+    // failing the test
+    return false
+  })
+
+
+// before(() => {
+//     cy.log('Log in')
+
+//     cy.visit('http://stage-warden.historicengland.org.uk/');
+//     console.log(home.expandNavBarBtn);
+//     cy.get(home.expandNavBarBtn).click();
+//     cy.get(home.signInBtn).click();
+
+//     cy.get(login.username).type('RWilliams')
+
+//     cy.get(login.password).type('!?Rwilliams2020')
+
+//     cy.get(login.signInBtn).click();
+
+//     cy.get(home.expandNavBarBtn).click();
+
+//   })
+// Alternatively you can use CommonJS syntax:
+// require('./commands')

@@ -1,0 +1,9 @@
+Change download file
+https://docs.cypress.io/api/plugins/browser-launch-api.html#Change-download-directory
+
+Recipes
+https://docs.cypress.io/examples/examples/recipes.html#Fundamentals
+
+Download files
+https://github.com/cypress-io/cypress-example-recipes/blob/master/examples/testing-dom__download/cypress/plugins/index.js
+

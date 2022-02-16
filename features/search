@@ -1,0 +1,86 @@
+@Search
+Feature: Search
+
+Background: 
+	Given wait for page loaded
+
+#This scenario is broken due to select element
+#@ignore
+#@24306_Search
+#Scenario: 00_The pointer is a cross hair when the map editing widget is digitising
+#	When I click on search tab
+#    And wait for page loaded
+#	And I click on "Filter" tab inside map window
+#	And I select "Draw a Polygon" from the map filters
+#
+#@26128_Search
+#Scenario: 01_Users can carry out a basic search
+#	When I click on search tab
+#   And wait for page loaded
+#	Then number of results should be present
+#	And I search for "Andover" and select first record
+#	Then results label should present lower number of results
+#
+#@19754_Search
+#Scenario: 02_Users can use the time filter to filter search results.
+#	When I click on search tab
+#    And wait for page loaded
+#	And I click on "Time Filter" button from map search menu
+#	And I select "Associated Activities - Start Date" from the "Type" drop down list on time filter tab
+#	And I select "Custom date range" from the "Within" drop down list on time filter tab
+#	And I type "2000-08-27" in the "From" calendar field on time filter tab
+#	And I type "2020-12-31" in the "To" calendar field on time filter tab
+#	Then results label should show "Results: 0"	
+#
+#@25345_Search
+#Scenario: 03_Searching for "Dover" should only display UK records
+#	When I click on search tab
+#    And wait for page loaded
+#	And I type "Dover" into map searchbox
+#	Then all suggestions contains "England" phrase
+#
+#@25346_Search
+#Scenario: 04_Searching for "Ciren" should only display results in Cirencester
+#	When I click on search tab
+#    And wait for page loaded
+#	And I type "Ciren" into map searchbox
+#	Then all suggestions or suggestions titles contains "Ciren" phrase
+#
+#@14103_Search
+#@14147_Search
+#Scenario: 05_The user is able to output search results
+#	When I click on search tab
+#   And wait for page loaded
+#	And I type "Andover" into map searchbox
+#	And I click Enter
+#	Then I click on Output Search btn from menu on top of the page
+#	And table of the results should display on the page
+#	And I click on the "Export Results to CSV" button
+#	Then file "wardenExport" should be dowloaded
+#
+#
+#@19756_AdvancedSearch
+#Scenario: 06_Advanced search displays a list of resource attributes
+#	When I click on search tab
+#    And wait for page loaded
+#	And I click on "Advanced" button from map search menu
+#	Then "Final_Bibliographic_Source" category is present on advanced search menu
+#	And "Final_Actor_Organization" category is present on advanced search menu
+#	And "Final_Actor_Person" category is present on advanced search menu
+#	And "Final_Archive_Source" category is present on advanced search menu
+#	And "Heritage Asset Maritime Craft" category is present on advanced search menu
+#	And "Heritage Asset Monument" category is present on advanced search menu
+#	And "Heritage Asset Historic Aircraft" category is present on advanced search menu
+#
+#@19757_AdvancedSearch
+#Scenario: 07_Users can build a query using one of more resources
+#	When I click on search tab
+#    And wait for page loaded
+#	And I click on "Advanced" button from map search menu
+#    And wait for page loaded
+#	Then I click on related area button under Heritage Asset Maritime Craft option
+#    And wait for page loaded
+#	And I select "County" from Area Type drop down list
+#    And wait for page loaded
+#	Then results label should show "Results: 37176"	
+

@@ -1,0 +1,33 @@
+@ProfileManager
+Feature: ProfileManager
+
+Background: 
+	Given wait for page loaded
+	Then I select Profile Manager from navigation bar
+	
+@12391_ProfileManager
+Scenario: Users can reset their password in the profile manager
+	And I click on the "Change password" button
+	When I change my password
+	And I click on the "Change Password" button
+	Then information "Password successfully updated" should be present
+	And I log out
+	Then I log in with updated password
+	And I select Profile Manager from navigation bar
+	And I change password to the old one
+
+@12393_ProfileManager
+Scenario:  User can edit their profile in the profile manager
+	And I click on the "Edit" button
+	And I type random text into "First name" input on Profile Manager page
+	And I type random text into "Last name" input on Profile Manager page
+	And I type random text into "Contact Email" input on Profile Manager page
+	Then I click on the "Save" button
+	And wait for page loaded
+	And I click on the "Edit" button
+	Then values should be saved
+	#To be continued, it doest work atm
+
+#@Verify email
+#Scenario: VerifyEmail
+#	Given perform actions

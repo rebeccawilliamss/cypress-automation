@@ -1,0 +1,22 @@
+{
+    "chromeWebSecurity": false,
+    "baseUrl": "https://stage-warden.historicengland.org.uk/",
+    "reporter":"cypress-multi-reporters",
+    "reporterOptions":{
+        "reporterEnabled":"mochawesome",
+        "mochawesomeReporterOptions":{
+            "reportDir":"cypress/reports/mocha",
+            "quite":true,
+            "overwrite":false,
+            "html":false,
+            "json":true
+        }
+    },
+
+    "defaultCommandTimeout" : 10000,
+    "pageLoadTimeout" : 100000,
+    "requestTimeout" : 20000,
+    "responseTimeout" : 60000,
+    "video" : false,
+    "trashAssetsBeforeRuns": true
+}

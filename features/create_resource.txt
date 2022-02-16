@@ -1,0 +1,470 @@
+@CreateResource
+Feature: CreateResource
+	As a Logged user, I've clicked on Manage Data tab,
+	Then I've clicked on Create Resource from Heritage Asset Monuments
+
+Background: 
+	Given wait for page loaded
+
+	
+@13329_CREATE_RESOURCE
+Scenario: 01_Resource editor visible for new resource
+	Then the cards should display down the left hand side of the page
+
+@14477_PRIM_REF_NUM
+Scenario: 02_Add a primary reference number to the new monument
+	Then resource id correspond to number generated as a part of current url
+	And the left-hand column would display "HobUid" under "Primary Reference Number" tab
+	And HobUid from input is equal to title on the top of the page
+
+
+@25996_PARENT_MONUMENTUM
+@26012_PRIM_REF_NUMBER
+Scenario: 03_Associated Parent Monument can be added to new resource
+	When I click on "Associated Parent Monument" tab from resource edit menu
+	And I select "1329621" from the "Parent_Monument" drop down list with smaller downside arrow
+	And I click Add button
+	Then the left-hand column would display "Parent_Monument" under "Associated Parent Monument" tab
+	And "1329621" next to it
+	Then I refresh the page
+	And I click on "Primary Reference Number" tab from resource edit menu
+	And the left-hand column would display "HobUid" under "Primary Reference Number" tab
+	And HobUid from input is equal to title on the top of the page
+
+@19743_CREATE_RESOURCE
+Scenario: 04_Asset name can be assigned to a Monument
+	When I click on "Asset Name" tab from resource edit menu
+	And I select "Primary" from the "Name Type" drop down list with smaller downside arrow
+	And I type "Test Monument" in the "Name" field
+	And I click Add button
+	Then the left-hand column would display "Name" under "Asset Name" tab
+	And "Test Monument" next to it
+
+@19745_CREATE_RESOURCE
+Scenario: 05_Add a former or alternative name to the Asset Name card
+	When I click on "Asset Name" tab from resource edit menu
+	And I select "Former" from the "Name Type" drop down list with smaller downside arrow
+	And I type "Test to be deleted" in the "Name" field
+	And I click Add button
+	Then the left-hand column would display "Name" under "Asset Name" tab
+	And "Test to be deleted" next to it
+
+@19753_LOCATIONS
+@26021_LOCATIONS
+@26022_LOCATIONS
+##Chain start
+Scenario: 06_The Location button is responsive and adressess/latitude/longitude can be added to the record
+	When I click on "Locations" tab from resource edit menu
+	And I click Add button
+	And wait for page loaded
+	Then after click on Add button a further card with add options for various location elements is open:
+	| Option                 |
+	| Map                    |
+	| Map References         |
+	| Related Areas          |
+	| Locational Descriptions |
+	| Addresses              |
+	| Latitude/Longitude     |
+	| Named Locations        |
+	| Spatial Metadata       |
+	#26021
+	When I click on "Addresses" tab from resource edit menu
+	And I select "Primary" from the "Address Status" drop down list with smaller downside arrow
+	And I type "Andover" in the "Town or City" field
+	And I type "100" in the "Number in Road or Street" field
+	And I type "Andover Road" in the "Road or Street Name" field
+	And I type "Andover" in the "Locality" field
+	And I type "SP103WF" in the "Postal Code" field
+	And I click Add button
+	And the left-hand column would display "Address Status" under "Addresses" tab
+	#26022
+	When I click on "Latitude/Longitude" tab from resource edit menu
+	And I select "N" from the "Latitude Hemisphere" drop down list with smaller downside arrow
+	And I type "51" in the "Latitude Degrees" field
+	And I type "12" in the "Latitude Minutes" field
+	And I type "20" in the "Latitude Seconds" field
+	And I select "W" from the "Longitude Hemisphere" drop down list with smaller downside arrow
+	And I type "001" in the "Longitude Degrees" field
+	And I type "30" in the "Longitude Minutes" field
+	And I type "25" in the "Longitude Seconds" field
+	And I type "10" in the "Height" field
+	And I select "General Depth" from the "Height Qualifier" drop down list with smaller downside arrow
+	And I click Add button
+	Then the attribute in the left-hand column would display "Latitude Hemisphere" that the content has been added
+	And the left-hand column would display "Latitude Hemisphere" under "Latitude/Longitude" tab
+
+
+@26020_LOCATIONS
+#Chain
+Scenario: 07_Locational description can be added
+	When I click on "Locational Descriptions" tab from resource edit menu
+	And I select "Summary" from the "Location Description Type" drop down list with smaller downside arrow
+	And I enter 'This is a test monument located in Andover' into the description text box
+	And I click Add button
+	Then the attribute in the left-hand column would display "Location Description" that the content has been added
+
+@26023_LOCATIONS
+#Chain
+Scenario: 08_Named Location data can be added to the record
+	When I click on "Named Locations" tab from resource edit menu
+	And I type "Test name" in the "Named Location Name" field
+	And I type "51°12′20″N" in the "Named Location Latitude" field
+	And I type "25" in the "Named Location Longitude" field
+	And I click Add button
+	Then the attribute in the left-hand column would display "Test name" that the content has been added
+
+@19749_LOCATIONS
+#Chain
+Scenario: 09_Overlays can be added to the map
+	When I click on "Map" tab from resource edit menu
+	And I click on "Overlay" tab inside map window
+	#Following steps need to be done in the future
+	#When I switch on the Monuments overlay
+	#Then the overlay should successfully save
+
+
+@26024_LOCATIONS
+Scenario: 10_Spatial metadata can be added to the record
+	When I click on "Spatial Metadata" tab from resource edit menu
+	And I select "1:10000" from the "Capture Scale" drop down list with smaller downside arrow
+	And I type "John Travolta" in the "Created By" field
+	And I type "12/11/2020" in the "Created Date" calendar field
+	When I select "1" from the "Spatial Accuracy Qualifier" drop down list with smaller downside arrow
+	When I select "OSGB36" from the "Coordinate System" drop down list with smaller downside arrow
+	And I type "Streets" in the "Current Base Map" field
+	And I type "John Travolta" in the "Updated By" field
+	And I type "12/11/2020" in the "Updated Date" calendar field
+	And I type "John Travolta" in the "Authorised By" field
+	And I type "12/11/2020" in the "Authorised Date" calendar field
+	When I select "Approx" from the "AMIE shape" drop down list with smaller downside arrow
+	And I type "Test" in the "Notes" field
+	And I click Add button
+	Then the attribute in the left-hand column would display "Capture Scale" that the content has been added
+
+@19748_LOCATIONS
+Scenario: 11_Specify location using the gazetteer and zoom tools
+	When I click on "Map" tab from resource edit menu
+	And I type "Swindon" into map searchbox
+	And I click "Enter" button on my keyboard
+	Then the map should create a dot located at "Swindon"
+
+
+@13844_LOCATIONS
+Scenario: 12_Validation message for invalid coords
+	When I click on "Map References" tab from resource edit menu
+	And I enter an invalid value into the Central Point Coordinate: "1234567890"
+	And I click Add button
+	Then an error message should appear below the box the value was entered into, stating that the coordinate did not pass validation
+
+@26018_LOCATIONS
+@17560_LOCATIONS
+@13808_LOCATIONS
+Scenario: 13_Valid coordinate can be added to the Map References node
+	When I click on "Map References" tab from resource edit menu
+	And I enter an valid value into the Central Point Coordinate: "SU3454145277"
+	##This click is weird - different behaviour for single scenario and for feature execution
+	And I click Add button
+	Then record is uploaded
+	And the attribute in the left-hand column would display "SU3454145277" that the content has been added
+	##17560 start##
+	And I refresh the page
+	Then Related Areas node should be automatically updated with the following Related Areas:
+	| Area Name     | Area Type       |
+	| Test Valley | District     |
+	| Hampshire   | County       |
+	| Andover     | Civil Parish |
+
+	###########################~~~~~~~~~~~~~~~~NEED TO BE REVIEWED~~~~~~~~~~~~~~~~~#######################################
+	When I click on "Locations" tab from resource edit menu
+	And I click on "Related Areas" tab from resource edit menu
+	Then the attribute in the left-hand column would display "Test Valley" that the content has been added
+	And the attribute in the left-hand column would display "Hampshire" that the content has been added
+	And the attribute in the left-hand column would display "Andover" that the content has been added
+	#13808 start##
+	Then I click on related areas record "Andover"
+	And I type "Name changed" in the "Area Name" field
+	Then only the Area Name "Andover" should change to "Name changed"
+	###########################~~~~~~~~~~~~~~~~NEED TO BE REVIEWED~~~~~~~~~~~~~~~~~#######################################
+
+@13328_DESCRIPTIONS
+Scenario: 14_Asset description field should display the cancel edit, add and delete buttons.
+	When I click on "Asset Descriptions" tab from resource edit menu 
+	And I enter 'If I had to do the same again - I would, my friend, Fernando' into the description text box
+	And I select "Full" from the "Asset_Description_Type" drop down list with smaller downside arrow
+	And I click Add button
+	Then the attribute in the left-hand column would display "Asset_Description" that the content has been added
+	And "Delete this record" button is present
+
+@26033_DESCRIPTIONS
+Scenario: 15_Summary description can be added to a record
+	When I click on "Asset Descriptions" tab from resource edit menu 
+	And I enter 'Ooh, see that girl, watch that scene - Digging the dancing queen' into the description text box
+	And I select "Summary" from the "Asset_Description_Type" drop down list with smaller downside arrow
+	And I click Add button
+	Then the attribute in the left-hand column would display "Asset_Description" that the content has been added
+
+@26025_CREA_RES_SOURCES
+Scenario: 16_Sources data can be added to the record
+	When I click on "Sources" tab from resource edit menu
+	And I type "2" in the "Source Number" field
+	And I select "Spec Pap Palaeontol" from the "Source or Source Type" drop down list with smaller downside arrow
+	And I type "Test" in the "Source Details" field
+	And I type "1-5" in the "Page(s)" field
+	And I type "3" in the "Figs." field
+	And I type "Test" in the "Plates" field
+	And I type "2" in the "Vol(s)" field
+	And I click Add button
+	Then the left-hand column would display "Source Number" under "Sources" tab
+
+@26026_CREA_RES_CONS_PHASE_ANDTYPE
+#Chain start
+Scenario: 17_Construction data can be added to the record
+	When I click on "Construction Phase and Type" tab from resource edit menu
+	And I select "21st Century" from the "Period" drop down list
+	And I type "20/10/2020" in the "From Date" field
+	And I type "20/10/2021" in the "To Date" field
+	And I type "20/10/2020" in the "Display Date" field
+	And I select "Agricultural Building" from the "Monument Type" drop down list
+	And I select "Physical Evidence" from the "Evidence" drop down list
+	And I select "MAN MADE MATERIAL" from the "Main Construction Material" drop down list
+	And I select "EARTH MIX" from the "Covering Material" drop down list
+	And I select "Production Methods" from the "Construction Method" drop down list
+	And I select "Construction Techniques" from the "Construction Technique" drop down list
+	And I type "Type - Summary" in the "Construction Description" field
+	And I select "Summary" from the "Construction Description Type" drop down list with smaller downside arrow
+	And I click Add button
+	Then the left-hand column would display "Period" under "Construction Phase and Type" tab
+
+
+
+@26027_CREA_RES_USE_PHASES
+#Chain
+Scenario: 19_Use Phase data can be added to the record
+	When I click on "Use Phase(s)" tab from resource edit menu
+	And I select "21st Century" from the "Period" drop down list
+	And I type "20/10/2020" in the "From Date" field
+	And I type "20/10/2021" in the "To Date" field
+	And I type "20/10/2020" in the "Display Date" field
+	And I select "Agricultural Building" from the "Functional Type" drop down list
+	And I select "Physical Evidence" from the "Evidence" drop down list
+	And I type "Test" in the "Use_Phase_Description" field
+	And I select "Summary" from the "Use_Phase_Description_Type" drop down list with smaller downside arrow
+	And I click Add button
+	Then the left-hand column would display "Period" under "Use Phase(s)" tab
+
+@26028_CREA_RES_COMP_AND_OBJ
+#Chain
+Scenario: 20_Components and Objects data can be added to the record
+	When I click on "Components and Objects" tab from resource edit menu
+	And I select "21st Century" from the "Period" drop down list
+	And I type "20/10/2020" in the "From date" field
+	And I type "20/10/2021" in the "To Date" field
+	And I type "20/10/2020" in the "Display Date" field
+	And I select previously entered data for Monument type:"Agricultural Building" from the "Associated construction" drop down list with smaller downside arrow
+	And I close auto generated list of options
+
+	And I select previously entered data for Functional type:"Agricultural Building" from the "Associated use" drop down list with smaller downside arrow
+	And I close auto generated list of options
+
+	And I select "ENTRANCE" from the "Addition" drop down list
+	And I select "BRICK" from the "Main Material(s)" drop down list
+	And I select "MORTAR" from the "Covering Building Material(s)" drop down list
+	And I select "Agricultural Building" from the "Component Monument Type" drop down list
+	And I select "AGRICULTURE AND SUBSISTENCE" from the "Object Type" drop down list
+	And I close auto generated list of options
+	And I select "Animal" from the "Object Material" drop down list
+	And I type "Test" in the "Addition_Phase_Description" field
+	And I select "Summary" from the "Addition_Phase_Description_Type" drop down list with smaller downside arrow
+	And I click Add button
+	Then the attribute in the left-hand column would display "Period" that the content has been added
+
+
+@26038_CREA_RES_CROSS_REF
+Scenario: 21_Cross references to other datasets can be added to a record
+	When I click on "Cross References to other datasets" tab from resource edit menu
+	And I select "AIP Record Number" from the "External Cross Reference Source" drop down list with smaller downside arrow
+	And I type "1234567890" in the "External Cross Reference Number" field
+	And I type "Test" in the "External Cross Reference Notes" field
+	And I click Add button
+	Then the left-hand column would display "External Cross Reference Source" under "Cross References to other datasets" tab
+
+@13809_ASSO_ORG
+@26040_ASSO_ORG
+Scenario: 22_Associated organisations can have multiple roles
+	When I click on "Associated Organisations" tab from resource edit menu
+	And I select "CG Searle and Son" from the "Organisation" drop down list
+	And I close auto generated list of options
+	And I select "Aerial Surveyor" from the "Organisation Role" drop down list
+	And I select "Annotator" from the "Organisation Role" drop down list
+	And I select "C" from the "Organisation Role Date Precision" drop down list with smaller downside arrow
+	And I click Add button
+	Then the left-hand column would display "Organisation" under "Associated Organisations" tab
+
+
+@26039_RELATED_WAR_MON
+Scenario: 22_Records without a name should have the HobUid as the name
+	When I click on "Related Warden Monuments" tab from resource edit menu
+	And I select "1329621" from the "Associated_Monuments" drop down list
+	And I close auto generated list of options
+	And I select "General association" from the "Relationship type" drop down list with smaller downside arrow
+	And I click Add button
+	Then the left-hand column would display "Associated_Monuments" under "Related Warden Monuments" tab
+
+@ignore
+##BUG 13322
+@13327_ASSO_PPL
+Scenario: 23_Typing full name into Associated People field should return that name
+	When I click on "Associated People" tab from resource edit menu
+	And I type "HELEN WINTON" in the "Person" combo box element
+	And I close auto generated list of options
+
+	
+@13780_ASSO_PPL
+##This test based on results from scenario 16
+Scenario: 24_Associated person can have many roles
+	When I click on "Associated People" tab from resource edit menu
+	And I select "LUKE GRIMSON" from the "Person" drop down list
+	And I close auto generated list of options
+	And I select previously entered data for Associated Organisations:"CG Searle and Son" from the "Affiliated Organisation" drop down list with smaller downside arrow
+	And I select "Aircraft Crew" from the "Person Role" drop down list
+	And I select "Archive Holder" from the "Person Role" drop down list
+	And I type "2020-11-02" in the "Person Role To Date" field
+	And I type "2021-11-02" in the "Person Role From Date" field
+	And I select "C" from the "Person Role Date Precision" drop down list with smaller downside arrow
+	And I click Add button
+	Then the left-hand column would display "Person" under "Associated People" tab
+
+
+10.12.2020 - HERE TO START :)!
+
+@26043_Related_NRHE_Activities	
+Scenario: 25_Related Activity data can be added to the record
+	When I click on "Related NRHE Activities" tab from resource edit menu
+	And I select "Primary, BRIDGES WHARF, BATTERSEA" from the "Associated_Activities" drop down list with smaller downside arrow
+	And I select "INTRUSIVE EVENT" from the "Activity Type" drop down list with smaller downside arrow
+	And I type "2020-11-02" in the "Start Date" field
+	And I type "2021-11-02" in the "End Date" field
+	And I click Add button
+	Then the left-hand column would display "Associated_Activities" under "Related NRHE Activities" tab
+
+@26044_Associated_HE_Archives
+Scenario: 26_HE Archives data can be added to the record
+	When I click on "Associated HE Archives" tab from resource edit menu
+	And I type "2" in the "Object Number" field
+	And I type "Test Archive" in the "Object Title" field
+	And I type "Test" in the "Comments" field
+	And I click Add button
+	Then the left-hand column would display "Object Number" under "Associated HE Archives" tab
+
+@26045_Area_Status
+Scenario: 27_Area status data can be added to the record
+	Given wait for page loaded
+	When I click on "Status" tab from resource edit menu
+	And I select "Conservation Area" from the "Area Status" drop down list with smaller downside arrow
+	And I type "2020-11-02" in the "From Date" calendar field
+	And I type "2021-11-02" in the "To Date" calendar field
+	And I type "Test" in the "Reference " field
+	And I click Add button
+	Then the left-hand column would display "Area Status" under "Area Status" tab
+	
+
+@26046_Land_Use
+Scenario: 28_Land use data can be added to the record
+	When I click on "Land Use" tab from resource edit menu
+	And I type "2020-11-02" in the "Assessment Date" calendar field
+	And I select "Other 2 (In use as building)" from the "Land Use Classification" drop down list with smaller downside arrow
+	And I click Add button
+	Then the left-hand column would display "Land Use Classification" under "Land Use" tab
+	
+@26047_Condition_Survey
+Scenario: 29_Condition Survey
+	Given wait for page loaded
+	When I click on "Condition Survey" tab from resource edit menu
+	And I select "CG Searle and Son" from the "Surveyor" drop down list
+	And I close auto generated list of options
+	And I select "Building Survey" from the "Survey Type" drop down list with smaller downside arrow
+	And I type "2020-11-02" in the "Survey From Date" field
+	And I type "2021-11-02" in the "Survey To Date" field
+	And I select "Good" from the "Condition on Survey" drop down list with smaller downside arrow
+	And I select "B" from the "Site Survey Condition" drop down list with smaller downside arrow
+	And I select "Interior Access" from the "Type of Access" drop down list with smaller downside arrow
+	And I select "Partially Occupied" from the "Level of Occupancy" drop down list with smaller downside arrow
+	And I select "Deterioration" from the "Threats" drop down list
+	And I select "Flooding" from the "Threats" drop down list
+	And I select "<10%" from the "Proportion of Site at Risk" drop down list with smaller downside arrow
+	And I select "Medium" from the "Level of Risk to Site" drop down list with smaller downside arrow
+	And I click Add button
+	Then the left-hand column would display "Survey Type" under "Condition Survey" tab
+
+/********************TODO*************************/
+@ignore
+@26036
+Scenario: 00_Swapping position of Summary and Full to display Summary in the search results
+	When I enter 'Full description' into the description text box
+	When I select "Full" from the "Asset_Description_Type" drop down list with smaller downside arrow
+	And I click Add button
+	When record is uploaded
+	And I click on "Asset Descriptions" tab from resource edit menu
+	And I enter 'Summary Description' into the description text box
+	And I select "Full" from the "Asset_Description_Type" drop down list with smaller downside arrow
+	And I click Add button
+	And I drag full description node below summary description node
+	And I search for this record HobUid
+	Then the "Summary Description" should be displayed in the search results
+/********************TODO*************************/
+
+@13815_REL_RES
+Scenario: 30_The user can add multiple related resources
+	When I click on "Related Resources" tab from resource edit menu
+	When I click the "Add Related Resources" button
+	#And I select "Welsh Marches, SJ 4320 2180/ink AP transcription" from the Related Resources drop down list
+	And I select "Welsh Marches, SJ 4320 2180/ink AP transcription" from the "" drop down list
+	And I close auto generated list of options
+	When I click the "Add" button
+	Then the record should be added as a related resource
+
+@13816_REL_RES
+Scenario: 31_The user can delete a related resource	
+	When I click on "Related Resources" tab from resource edit menu
+	And related resource is present
+	Then I select related resource record
+	And I click the "Delete Selected" button
+	Then related resource has been deleted
+
+@14109_RES_EDIT
+Scenario: 32_User can make a copy of a resource
+	When I click on "Manage" menu control on the top of the page
+	When I click on "Copy Resource" element under Manage menu
+	Then a validation message 'Resource Successfully Copied.' in a blue banner should show at the top of the page
+
+@14110_RES_EDIT
+Scenario: 33_Admin users can delete existing records.
+	Given wait for page loaded
+	When I capture HobUId for created record
+	Given wait for page loaded
+	When I click on "Manage" menu control on the top of the page
+	Given wait for page loaded
+	When I click on "Delete Resource" element under Manage menu
+	And I click the "OK" button
+	Then I am redirected to "http://stage-warden.historicengland.org.uk/resource"
+	Given wait for page loaded
+	When I search for deleted record
+	#Because we run this tests in particular order, results should be 1 instead of 0, cause record was coppied
+	Then results label should show "Results: 1"	
+
+
+#Need to be reviewed
+#@14373_LOCATIONS
+#Scenario: Plotting a point on the map creates a new map feature
+#	Given I am on the Warden login page
+#	And I click Sign in button
+#	When I enter my username and password
+#	And I click on the Sign In button
+#	And I click on Manage Data tab
+#	And I click on Resource tab
+#	When I click on Create Resource for Heritage_Asset_Monuments
+#	When I click on "Locations" tab from resource edit menu
+#	And I click "Add" button
+#	When I click on "Map" tab from resource edit menu
+#	And I select Add point from Add a new feature ddl
+
