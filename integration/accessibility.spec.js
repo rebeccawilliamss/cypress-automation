@@ -10,7 +10,7 @@ describe.skip("Verify accessibility across application", function () {
     Cypress.Cookies.preserveOnce(
       "ai_session",
       "csrftoken",
-      "warden",
+      "/",
       "ai_user"
     );
   });
