@@ -16,7 +16,7 @@ describe('Tests cover different functionalities across application',() => {
       Cypress.Cookies.preserveOnce(
       'ai_session',
       'csrftoken',
-      'warden',
+      '/',
       'ai_user');
       cy.viewport(1600, 1200);
   })
@@ -26,7 +26,7 @@ describe('Tests cover different functionalities across application',() => {
       cy.visit('/');
       cy.viewport(1600, 1200);
 
-      cy.login({ username: 'RWilliams', password: '!?Rwilliams2020'});
+      cy.login({ username: '/', password: '/'});
       cy.xpath('//a[contains(text(), "Log off")]').should('be.visible');
 
       cy.xpath(home.searchBtn).click();
@@ -46,7 +46,7 @@ describe('Tests cover different functionalities across application',() => {
       cy.get('.modal-body').within(($modal) => {
           let modal = $modal.text()
           expect(modal).to.contain
-          ('https://stage-warden.historicengland.org.uk/mvt/30fe747f-5aba-11e9-aa49-000d3ab1e588/{z}/{x}/{y}.pbf')
+          ('/')
 
       })
 
