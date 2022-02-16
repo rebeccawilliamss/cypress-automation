@@ -1,0 +1,34 @@
+{
+  "name": "cypressproj",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean:reports": "rmdir /S /Q cypress\\reports && mkdir cypress\\reports && mkdir cypress\\reports\\mochareports",
+    "pretest": "npm run clean:reports",
+    "scripts": "cypress run --headless --browser chrome",
+    "combine-reports": "mochawesome-merge cypress/reports/mocha/*.json > cypress/reports/mochareports/report.json",
+    "generate-reports": "marge cypress/reports/mochareports/report.json --inline=true -f report -o cypress/reports/mochareports",
+    "posttest": "npm run combine-reports && npm run generate-reports",
+    "test": "npm run scripts || npm run posttest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "clipboardy": "^2.3.0",
+    "cy-verify-downloads": "^0.0.5",
+    "cypress": "^9.2.1",
+    "cypress-downloadfile": "^1.2.1",
+    "cypress-multi-reporters": "^1.4.0",
+    "cypress-xpath": "^1.6.1",
+    "mocha": "^8.2.1",
+    "mochawesome": "^6.2.1",
+    "mochawesome-merge": "^4.2.0",
+    "mochawesome-report-generator": "^5.1.0"
+  },
+  "dependencies": {
+    "axe-core": "^4.1.1",
+    "cypress-axe": "^0.12.0",
+    "cypress-get-table": "^1.0.1"
+  }
+}
