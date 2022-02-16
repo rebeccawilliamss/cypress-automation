@@ -15,10 +15,10 @@ describe('Create resource functionalities',function(){
 
     before(()=>{
 
-        cy.log('**** Log in to Warden application ****');
+        cy.log('**** Log in to application ****');
         cy.visit('/');
         cy.viewport(1600, 1200)
-        cy.login({ username: 'RWilliams', password: '!?Rwilliams2020'});
+        cy.login({ username: '/', password: '/'});
 
         cy.log('**** Navigate to create Monument record ****');
         cy.xpath(home.manageDataBtn).invoke('removeAttr','target').click();
@@ -39,7 +39,7 @@ describe('Create resource functionalities',function(){
 
         cy.log('**** Select associated parent monument ****');
         action.selectFromResTree('Associated Parent Monument');
-        action.typeInFieldAndSelectOptionSmall('Parent_Monument','1329621','1329621');
+        action.typeInFieldAndSelectOptionSmall('Parent_Monument','/','/');
 
         cy.get('button').contains('Add').click({force: true});
 
@@ -136,8 +136,8 @@ describe('Create resource functionalities',function(){
         action.typeIntoField('Town or City','Andover');
         action.typeIntoField('Number in Road or Street','100');
         action.typeIntoField('Road or Street Name','Andover Road');
-        action.typeIntoField('Locality','Andover');
-        action.typeIntoField('Postal Code','SP103WF');
+        action.typeIntoField('Locality','/');
+        action.typeIntoField('Postal Code','/');
         cy.get('button').contains('Add').click().wait(1000);
 
         cy.log('********** Verify if addresses have been added **********');
