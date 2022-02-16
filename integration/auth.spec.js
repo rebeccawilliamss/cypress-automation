@@ -6,13 +6,13 @@ describe('Login to the Warden as a existing user',function(){
       Cypress.Cookies.preserveOnce(
       'ai_session',
       'csrftoken',
-      'warden',
+      '/',
       'ai_user');
     })
 
     it('Log in',function(){
 
-      cy.log('**** Navigate to warden website ****');
+      cy.log('**** Navigate to website ****');
       cy.visit('/');
       cy.viewport(1600, 1200);
 
