@@ -6,63 +6,22 @@ class HeritageGatewayPage {
   constructor() {}
   navigateToHgRecord() {
 
-    cy.visit('https://www.heritagegateway.org.uk/Gateway-Stage/Results_Single.aspx?uid=9b8a6b9e-c053-11ea-8560-002248007706&resourceID=19192');
+    cy.visit('/');
     cy.viewport(1600, 1200);
     cy.xpath(home.cookiesBtn).click();
-    // cy.xpath(webElems.searchInput).type(hobUid);
-    // cy.xpath(webElems.submitBtn).click();
-
-    // cy.xpath(`//a[text()="Historic England research records (DEV)"]`)
-    // .should("be.visible")
-    // .should(($elem) => {
-    //     expect($elem).to.not.contain("Searching");
-    // })
-    //   .then(($res) => {
-    //     cy.xpath('//a[text()="Historic England research records (DEV)"]').click();
-    //     cy.xpath('(//a[contains(text(), "Monument Number ' + hobUid + '")])[2]').click();
-    //     // cy.xpath(`(//a[text()="${hobUid}"])[1]`).click();
-    //   });
-  }
 
   navigateToHgAircraftRecord() {
 
-    cy.visit('https://www.heritagegateway.org.uk/Gateway-Stage/Results_Single.aspx?uid=f8a1fc5c-c9f7-42c8-8754-f824e09e66eb&resourceID=19192');
+    cy.visit('/');
     cy.viewport(1600, 1200);
     cy.xpath(home.cookiesBtn).click();
-    // cy.xpath(webElems.searchInput).type(hobUid);
-    // cy.xpath(webElems.submitBtn).click();
-
-    // cy.xpath(`(//a[contains(text(), 'Historic England research records (DEV)')])[1]`)
-    // .should("be.visible")
-    // .should(($elem) => {
-    //     expect($elem).to.not.contain("Searching");
-    // })
-
-    // cy.xpath('//a[text()="Historic England research records (DEV)"]').within(() => {
-
-    //   cy.xpath(`(//a[contains(text(), '${recordTitle}')])[1]`).click();
-    // });
   }
 
   navigateToHgMaritimeRecord() {
 
-    cy.visit('https://www.heritagegateway.org.uk/Gateway-Stage/Results_Single.aspx?uid=02db044a-817d-41a0-a506-4cb64e648428&resourceID=19192');
+    cy.visit('/');
     cy.viewport(1600, 1200);
     cy.xpath(home.cookiesBtn).click();
-    // cy.xpath(webElems.searchInput).type(hobUid);
-    // cy.xpath(webElems.submitBtn).click();
-
-    // cy.xpath(`(//a[contains(text(), 'Historic England research records (DEV)')])[1]`)
-    // .should("be.visible")
-    // .should(($elem) => {
-    //     expect($elem).to.not.contain("Searching");
-    // })
-
-    // cy.xpath('//a[text()="Historic England research records (DEV)"]').within(() => {
-
-    //   cy.xpath(`//a[contains(text(), '${recordTitle}')]`).click();
-    // });
-
   }
 
 
@@ -134,9 +93,9 @@ class HeritageGatewayPage {
 
   navigateToWardenRecord(hobUid) {
 
-    cy.visit("https://stage-warden.historicengland.org.uk/");
+    cy.visit("/");
     cy.viewport(1600,1200);
-    cy.login({ username: 'RWilliams', password: '!?Rwilliams2020' });
+    cy.login({ username: '/', password: '/' });
 
     cy.xpath(search.searchTabNavBar).click();
 
@@ -165,7 +124,7 @@ class HeritageGatewayPage {
   }
 
   verifyWardenMonumentRecord(...params) {
-    cy.visit("https://stage-warden.historicengland.org.uk/report/9b8a6b9e-c053-11ea-8560-002248007706");
+    cy.visit("/");
     cy.wait(5000);
 
     cy.xpath(`((//div[@class="rp-report-tile"])[1]/dl/dd)[1]`).then(
@@ -210,7 +169,7 @@ class HeritageGatewayPage {
   }
 
   verifyWardenAircraftRecord(...params) {
-    cy.visit("https://stage-warden.historicengland.org.uk/report/f8a1fc5c-c9f7-42c8-8754-f824e09e66eb");
+    cy.visit("/");
     cy.xpath('((//div[@class="rp-report-tile"])[1]/dl/dd)[1]').then(
       ($hobUid) => {
         let wardenHobUid = $hobUid.text();
@@ -254,7 +213,7 @@ class HeritageGatewayPage {
 
   verifyWardenMaritimeRecord(...params) {
     cy.visit(
-      "https://stage-warden.historicengland.org.uk/report/02db044a-817d-41a0-a506-4cb64e648428"
+      "/"
     );
     cy.wait(6000);
     cy.get(".scroll-y").scrollTo("bottom");
@@ -296,9 +255,9 @@ class HeritageGatewayPage {
 const webElems = {
   searchInput: '//input[@id="ctl01_ContentPlaceHolder1_txtFreeText"]',
   submitBtn: '//input[@type="submit"]',
-  heDevRecordsLink: `(//a[contains(text(), 'Historic England research records (DEV)')])[1]`,
+  heDevRecordsLink: `(//a[contains(text(), '/ (DEV)')])[1]`,
   heDevRecordsDesc:
-    '(//td[contains(text(),"This includes records about archaeological sites")])[2]',
+    '(//td[contains(text(),"This")])[2]',
   resultsNumberForArchesStage:
     '((//div[@id="ctl00_ContentPlaceHolder1_TabContainer1_TabPanel1_Accordion3"]/div)[7]/table/tbody/tr/td)[2]/strong',
   searchResultRow:
@@ -318,9 +277,9 @@ const webElems = {
   locationParagraphInRecordDescription: "((//table)[2]/tbody/tr)[3]/td",
   summaryParagraphInRecordDescription: "((//table)[2]/tbody/tr)[5]/td",
   informationIcon: '//img[@alt="About Historic England research records (DEV)"]/..',
-  informationPageTitle: '//span[@class="title" and contains(text(),"Historic England research records (DEV)")]',
+  informationPageTitle: '//span[@class="title" and contains(text()," (DEV)")]',
   showAllSearchRecordsLink:
-    '//strong/a[contains(text(),"Historic England research records (DEV)")]',
+    '//strong/a[contains(text()," (DEV)")]',
   // firstRecordFromFullList: '(//a[contains(text(),"Monument Number")])[1]',
   firstRecordFromFullList: "(//span/table/tbody/tr/td/a)[1]",
 };
