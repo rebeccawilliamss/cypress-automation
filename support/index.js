@@ -25,23 +25,3 @@ Cypress.on('uncaught:exception', (err, runnable) => {
     return false
   })
 
-
-// before(() => {
-//     cy.log('Log in')
-
-//     cy.visit('http://stage-warden.historicengland.org.uk/');
-//     console.log(home.expandNavBarBtn);
-//     cy.get(home.expandNavBarBtn).click();
-//     cy.get(home.signInBtn).click();
-
-//     cy.get(login.username).type('RWilliams')
-
-//     cy.get(login.password).type('!?Rwilliams2020')
-
-//     cy.get(login.signInBtn).click();
-
-//     cy.get(home.expandNavBarBtn).click();
-
-//   })
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
