@@ -17,10 +17,10 @@ Cypress.Commands.add('login', (user) => {
     cy.xpath(landingPage.logOffBtn).contains('Log off').should('be.visible');
 })
 
-// Search for a record in Heritage Gateway
+// Search for a record in Gateway
 Cypress.Commands.add('hgsearch', (record) => {
 
-    cy.visit("http://heritagegateway.org.uk/Gateway-Stage/");
+    cy.visit("/");
     cy.viewport(1600, 1200);
     cy.xpath(landingPage.cookiesBtn).click();
     cy.xpath(hgws.searchInput).type(record.record);
@@ -36,8 +36,8 @@ Cypress.Commands.add('loginRequest', (username, password) => {
         url: '/auth/',
         form: true,
         body: {
-            username: 'RWilliams',
-            password: '!?Rwilliams2020',
+            username: '/',
+            password: '/',
         },
     }).its('status').should('eq', 200)
 })
