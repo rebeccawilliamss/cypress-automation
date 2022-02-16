@@ -18,11 +18,11 @@ describe('Search functionality', () => {
         Cypress.Cookies.preserveOnce(
         'ai_session',
         'csrftoken',
-        'warden',
+        '/',
         'ai_user');
         cy.viewport(1600, 1200);
 
-        cy.login({ username: 'RWilliams', password: '!?Rwilliams2020'});
+        cy.login({ username: '/', password: '/'});
         cy.xpath('//a[contains(text(), "Log off")]').should('be.visible');
 
     })
@@ -109,13 +109,11 @@ describe('Search functionality', () => {
         })
     })
 
-    // To be completed with help
+ it('The user is able to output search results', () => {
 
-    it.skip('The user is able to output search results', () => {
+        cy.xpath(homePage.searchBtn).click();
 
         cy.log('**** refine search results ready to be exported ****')
-        //cy.xpath(search.searchTabNavBar).click({force:true});
-        cy.xpath(`//span[contains(text(), 'Andover')]/../../a`).click();
         cy.xpath(search.searchBar).type('1628801{enter}');
         cy.xpath(search.searchResultsLabel).contains('1628801').click();
         cy.xpath(search.outputSearchBtn).click();
@@ -123,11 +121,22 @@ describe('Search functionality', () => {
         cy.xpath('//table').should('be.visible');
         cy.xpath(search.exportResultsToCsvBtn).click();
 
+        cy.wait(3000)
+
         const downloadsFolder = Cypress.config('downloadsFolder');
-        const fileName = path.join(__dirname, "..", downloadsFolder);
-
-        cy.readFile(fileName).should('exist');
-
+        let fileName
+        cy.task("downloadFile", downloadsFolder).then((result) => {
+            fileName = result    
+            cy.log(result)
+            cy.log(fileName)
+            const filePath = path.join(downloadsFolder, fileName);
+            cy.log(filePath)
+            cy.readFile(filePath).should('exist');
+            
+            cy.task("readFile", filePath).then((result2) => {
+                cy.log(result2).should('contain', '1628801')
+                }) 
+        })
     })
 
 })
