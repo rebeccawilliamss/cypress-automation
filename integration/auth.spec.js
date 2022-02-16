@@ -17,7 +17,7 @@ describe('Login to the Warden as a existing user',function(){
       cy.viewport(1600, 1200);
 
       cy.log('********** Log in as a user **********');
-      cy.login({ username: 'RWilliams', password: '!?Rwilliams2020'});
+      cy.login({ username: '/', password: '/'});
 
       cy.log('********** Check if user can logout **********');
       cy.contains('Log off').click();
