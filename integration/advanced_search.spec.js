@@ -17,7 +17,7 @@ describe('Advanced search tests', () => {
     before(() => {
         cy.visit('/');
         cy.viewport(1600, 1200);
-        cy.login({ username: 'RWilliams', password: '!?Rwilliams2020'});
+        cy.login({ username: '/', password: '/'});
         home.checkLoggedIn();
 
         cy.xpath(homePage.searchBtn).click();
@@ -26,14 +26,14 @@ describe('Advanced search tests', () => {
 
     it('Advanced search displays a list of resource attributes',function(){
 
-        search.advancedSearchCategoryIsPresent('Organizations');       
-        search.advancedSearchCategoryIsPresent('People'); 
-        search.advancedSearchCategoryIsPresent('Bibliographic Source'); 
-        search.advancedSearchCategoryIsPresent('Activities'); 
-        search.advancedSearchCategoryIsPresent('Historic Aircraft'); 
-        search.advancedSearchCategoryIsPresent('Monument'); 
-        search.advancedSearchCategoryIsPresent('Archive Source'); 
-        search.advancedSearchCategoryIsPresent('Maritime Craft');  
+        search.advancedSearchCategoryIsPresent('/');       
+        search.advancedSearchCategoryIsPresent('/'); 
+        search.advancedSearchCategoryIsPresent('/'); 
+        search.advancedSearchCategoryIsPresent('/'); 
+        search.advancedSearchCategoryIsPresent('/'); 
+        search.advancedSearchCategoryIsPresent('/'); 
+        search.advancedSearchCategoryIsPresent('/'); 
+        search.advancedSearchCategoryIsPresent('/');  
  
     })
 
@@ -46,7 +46,7 @@ describe('Advanced search tests', () => {
             search.selectAdvancedSearchFacet('Asset Name');
             search.checkAdvancedSearchFormVisible();
     
-            search.inputIntoAdvancedSearchFormTextField('Name', 'Andover')
+            search.inputIntoAdvancedSearchFormTextField('Name', '/')
             search.checkAdvancedSearchFormVisible(txt);
             cy.xpath(searchPage.resultsNumber).contains('21');
 
@@ -65,7 +65,7 @@ describe('Advanced search tests', () => {
         cy.log('**** add an advanced search facet and fill in a field ****')
             search.selectAdvancedSearchFacet('Asset Name');
             search.checkAdvancedSearchFormVisible();
-            search.inputIntoAdvancedSearchFormTextField('Name', 'Andover');
+            search.inputIntoAdvancedSearchFormTextField('Name', '/');
     
             cy.log('**** Add a second facet, fill in a field and click the Or button, checking results are filtered appropriately ****')
             search.selectAdvancedSearchFacet('Asset Description');
