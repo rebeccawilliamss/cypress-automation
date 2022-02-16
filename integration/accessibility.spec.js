@@ -16,7 +16,7 @@ describe.skip("Verify accessibility across application", function () {
   });
 
   before(() => {
-    cy.visit("https://stage-warden.historicengland.org.uk/");
+    cy.visit("/");
   });
 
   it("Home page check", function () {
@@ -48,8 +48,8 @@ describe.skip("Verify accessibility across application", function () {
   it("Logged user check", function () {
     cy.log("Check accessibility on logged user page");
 
-    cy.xpath(login.usernameInput).type("RWilliams");
-    cy.xpath(login.passwordInput).type("!?Rwilliams2020");
+    cy.xpath(login.usernameInput).type("/");
+    cy.xpath(login.passwordInput).type("/");
     cy.xpath(login.signInBtn).click();
 
     cy.injectAxe();
