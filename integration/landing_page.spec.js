@@ -1,7 +1,7 @@
 
 describe('Landing page functionalities',function(){
       beforeEach(()=>{
-        Cypress.Cookies.preserveOnce('ai_session', 'csrftoken','warden','ai_user');
+        Cypress.Cookies.preserveOnce('ai_session', 'csrftoken','/','ai_user');
         cy.visit('/');
         cy.viewport(1600, 1200);
     })
@@ -10,7 +10,7 @@ describe('Landing page functionalities',function(){
 
 it('can log into the application', () => {
 
-    cy.login({ username: 'RWilliams', password: '!?Rwilliams2020'});
+    cy.login({ username: '/', password: '/'});
     cy.xpath('//a[contains(text(), "Log off")]').should('be.visible');
 })
 
@@ -25,7 +25,7 @@ it('nav bar should have 7 links when user is logged in', () => {
 
 it('can click all links in the nav bar', () => {
 
-    const links = ['About Warden', 'Search', 'Manage Data']
+    const links = ['About/', 'Search', 'Manage Data']
 
     links.forEach(link => {
 
