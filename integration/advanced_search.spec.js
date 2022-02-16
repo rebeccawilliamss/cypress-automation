@@ -9,7 +9,7 @@ describe('Advanced search tests', () => {
     beforeEach(()=>{
         Cypress.Cookies.preserveOnce('ai_session',
         'csrftoken',
-        'warden',
+        '/',
         'ai_user');
         cy.viewport(1600, 1200);
     })
