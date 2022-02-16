@@ -8,7 +8,7 @@ describe("Profile manager functionality", function () {
     Cypress.Cookies.preserveOnce(
       "ai_session",
       "csrftoken",
-      "warden",
+      "/",
       "ai_user"
     );
 
@@ -22,17 +22,17 @@ describe("Profile manager functionality", function () {
   it("@12391: Change password", () => {
 
     cy.log("**** Log in as a user ****");
-    cy.login({ username: 'RWilliams', password: '!?Rwilliams2020'});
+    cy.login({ username: '/', password: '/'});
 
     cy.log('**** navigate to the profile manager page ****')
     cy.contains('Welcome').click();
-    cy.url().should('eq', 'https://stage-warden.historicengland.org.uk/user');
+    cy.url().should('eq', '/');
 
     cy.log("**** Change password to new password ****");
     cy.get('button').contains('Change password').click();
-    cy.get('#old_password').type("!?Rwilliams2020");
-    cy.get('#new_password1').type("!?Newpassword2020");
-    cy.get('#new_password2').type("!?Newpassword2020");
+    cy.get('#old_password').type("/");
+    cy.get('#new_password1').type("/");
+    cy.get('#new_password2').type("/");
     cy.get('button').contains('Change Password').click({force: true });
 
     cy.log("**** Verify if password has been changed **** ");
@@ -43,16 +43,16 @@ describe("Profile manager functionality", function () {
     cy.get('span').contains('Logout').click();
 
     cy.log("**** Login using new password ****");
-    cy.get('#username').clear().type('RWilliams');
-    cy.get('#password').clear().type('!?Newpassword2020');
+    cy.get('#username').clear().type('/');
+    cy.get('#password').clear().type('/');
     cy.get('button').contains('Sign In').click();
     cy.contains("Welcome").click();
 
     cy.log("**** Change password to the old one ****");
     cy.get('button').contains('Change password').click();
-    cy.get('#old_password').type("!?Newpassword2020");
-    cy.get('#new_password1').type("!?Rwilliams2020");
-    cy.get('#new_password2').type("!?Rwilliams2020");
+    cy.get('#old_password').type("/");
+    cy.get('#new_password1').type("/");
+    cy.get('#new_password2').type("/");
     cy.get('button').contains('Change Password').click({force: true });
     cy.xpath('//div[@class="profile-summary-page back-to-top-me"]').scrollTo(
       "top"
@@ -63,19 +63,19 @@ describe("Profile manager functionality", function () {
   });
 
   it("@12393: Profile Manager - User can edit their profile", function () {
-    cy.log("**** Navigate to warden website ****");
+    cy.log("**** Navigate to website ****");
     cy.visit('/');
 
     cy.log("**** Log in as a user ****");
-    cy.login({ username: 'RWilliams', password: '!?Rwilliams2020'})
+    cy.login({ username: '/', password: '/'})
     cy.contains("Welcome").click();
 
     cy.log("**** Edit name, surname and email address ****");
     cy.get('button').contains('Edit').click();
-    cy.get('#first_name').clear().type('Test');
-    cy.get('#last_name').clear().type('Test');
+    cy.get('#first_name').clear().type('/');
+    cy.get('#last_name').clear().type('/');
 
-    cy.get('#email').clear().type('test@test.com');
+    cy.get('#email').clear().type('/');
     cy.get('button').contains('Save').click();
 
     cy.log("**** Verify if data have been changed ****");
@@ -92,7 +92,7 @@ describe("Profile manager functionality", function () {
       cy.get('#email')
         .invoke("val")
         .then(($val) => {
-          expect($val).to.include('test@test.com');
+          expect($val).to.include('/');
         });
     });
 
@@ -100,27 +100,27 @@ describe("Profile manager functionality", function () {
 
       cy.log("**** Edit name, surname and email address ****");
       cy.get('button').contains('Edit').click();
-      cy.get('#first_name').clear().type('Rebecca');
-      cy.get('#last_name').clear().type('Williams');
+      cy.get('#first_name').clear().type('/');
+      cy.get('#last_name').clear().type('/');
 
-      cy.get('#email').clear().type('rebecca.williams@historicengland.org.uk');
+      cy.get('#email').clear().type('/');
       cy.get('button').contains('Save').click();
 
       cy.log("**** Verify if data have been changed ****");
         cy.get('#first_name')
           .invoke("val")
           .then(($val) => {
-            expect($val).to.include('Rebecca');
+            expect($val).to.include('/');
           });
         cy.get('#last_name')
           .invoke("val")
           .then(($val) => {
-            expect($val).to.include('Williams');
+            expect($val).to.include('/');
           });
         cy.get('#email')
           .invoke("val")
           .then(($val) => {
-            expect($val).to.include('rebecca.williams@historicengland.org.uk');
+            expect($val).to.include('/');
           });
       });
 
