@@ -5,24 +5,24 @@ import HeritageGatewayPage from "../POM/heritage_gateway";
 
 const hgAction = new HeritageGatewayPage();
 
-describe("Tests cover different functionalities across heritage gateway", () => {
+describe("Tests cover different functionalities across /", () => {
   beforeEach(() => {
     Cypress.Cookies.preserveOnce(
       "ai_session",
       "csrftoken",
-      "warden",
+      "/",
       "ai_user"
     );
     cy.viewport(1600,1200);
 
   })
 
-  it("@24541: HGWS: Historic England research records returns correctly from a search done in Heritage Gateway ", () => {
+  it("@24541: HGWS: / research records returns correctly from a search done in /", () => {
 
     cy.log("**** Verify if record is visible in search results ****");
-    cy.hgsearch({ record: '221912'});
+    cy.hgsearch({ record: '/'});
     cy.xpath(hgws.heDevRecordsLink).click();
-    cy.xpath(`(//a[contains(text(), 'Monument Number 221912')])[2]`)
+    cy.xpath(`(//a[contains(text(), '/')])[2]`)
     .should('be.visible');
 
   });
@@ -32,7 +32,7 @@ describe("Tests cover different functionalities across heritage gateway", () => 
     cy.log("**** Verify if table have following column titles: Title, Location, Descrtiption ****");
 
     cy.hgsearch({ record: '221912'});
-    cy.xpath(hgws.heDevRecordsLink).click();
+    cy.xpath(hgws.DevRecordsLink).click();
     cy.xpath(`(//table)[30]`).should('be.visible');
 
     cy.log('**** check table contains correct headings and data from first row ****')
@@ -43,20 +43,20 @@ describe("Tests cover different functionalities across heritage gateway", () => 
     cy.xpath(`(//table)[30]//td`).contains('Possible Bronze Age round barro...').should('be.visible');
   });
 
-  it('an accessioned record in Warden does not display in the Heritage Gateway', () => {
+  it('an accessioned record does not display in the Heritage Gateway', () => {
 
-    cy.log('**** visit URL for Warden accessioned record ****')
-    cy.visit('https://www.heritagegateway.org.uk/Gateway-Stage/Results_Single.aspx?uid=027de798-5292-4bfa-9ef7-68764ec19375&resourceID=19192');
+    cy.log('**** visit URL for accessioned record ****')
+    cy.visit('/');
 
-    cy.log('**** check the page heading is HER Accessioned ****')
-    cy.get('strong').contains('HER Accessioned. ')
+    cy.log('**** check the page heading is  Accessioned ****')
+    cy.get('strong').contains(' Accessioned. ')
     .should('be.visible');
 
     cy.log('**** loop through element and check Accessioned organisation exists ****')
     cy.get('.resultBlockSingle').within(($el) => {
 
       for (let i = 0; i <= $el; i++) {
-        expect($el[i].textContent).to.contain('Morley and Woodhouse')
+        expect($el[i].textContent).to.contain('/')
       }
     });
   })
@@ -77,12 +77,12 @@ describe("Tests cover different functionalities across heritage gateway", () => 
 
     cy.hgsearch({ record: '221912'});
 
-    cy.xpath(hgws.heDevRecordsLink).click();
+    cy.xpath(hgws.DevRecordsLink).click();
     cy.xpath(hgws.showAllSearchRecordsLink).click({ force: true });
     cy.xpath(hgws.firstRecordFromFullList).click();
 
     cy.log("**** Verify if record contains correct information ****");
-    cy.xpath("//h1").contains("Historic England Research Records");
+    cy.xpath("//h1").contains("Research Records");
     cy.xpath("//h2").contains("Monument Number");
     cy.xpath("//strong").contains("Hob Uid: ");
     cy.xpath("//strong").contains("Location");
@@ -97,7 +97,7 @@ describe("Tests cover different functionalities across heritage gateway", () => 
     cy.xpath("//strong").contains("Related Activities");
   });
 
-  it("@23616: HGWS: Searching for monuments in HG returns the same results in Warden", () => {
+  it("@23616: HGWS: Searching for monuments in HG returns the same results", () => {
     let hobUid = "1626241";
     let location = "Devon";
     let descSum = "Part of a possible ditched";
@@ -110,7 +110,7 @@ describe("Tests cover different functionalities across heritage gateway", () => 
     hgAction.verifyHgMonumentRecord(hobUid, location, descSum, descFull);
   });
 
-  it("@23616: Monuments - HG returns the same results in Warden", () => {
+  it("@23616: Monuments - HG returns the same results", () => {
     let hobUid = "1626241";
     let expDistrict = "Teignbridge";
     let expCounty = "Devon";
@@ -118,12 +118,11 @@ describe("Tests cover different functionalities across heritage gateway", () => 
     let expDescSum = "Part of a possible ditched";
     let expDescFull = "It is centred at SX 82980 64194";
 
-    cy.log("**** Navigate to Warden *****");
-    hgAction.navigateToWardenRecord(hobUid);
+    hgAction.navigateToRecord(hobUid);
     //hgAction.verifyLabelId(hobUid);
 
-    cy.log("**** Verify warden monument report data ****");
-    hgAction.verifyWardenMonumentRecord(
+    cy.log("**** Verify report data ****");
+    hgAction.verifyMonumentRecord(
       hobUid,
       expDistrict,
       expCounty,
@@ -133,13 +132,13 @@ describe("Tests cover different functionalities across heritage gateway", () => 
     );
   });
 
-  it("@23617: HGWS: Searching for Aircrafts in HG returns the same results in Warden", () => {
+  it("@23617: HGWS: Searching for Aircrafts in HG returns the same results", () => {
     let hobUid = "1591016";
     let title = "<Name>";
     let location = "Hampshire";
     let location2 = "East Hampshire";
-    let descSum = "Approximate crash site of aircraft T2574";
-    let descFull = " 640 bundles of leaflets";
+    let descSum = "/";
+    let descFull = " /";
 
     cy.log("**** Navigate to HG record ****");
     hgAction.navigateToHgAircraftRecord(hobUid, title);
@@ -154,21 +153,20 @@ describe("Tests cover different functionalities across heritage gateway", () => 
     );
   });
 
-  it("@23617: Aircrafts - HG returns the same results in Warden", () => {
+  it("@23617: Aircrafts - HG returns the same results", () => {
     let hobUid = "1591016";
     let expCounty = "Hampshire";
-    let expCivParName = "Whitehill";
+    let expCivParName = "/";
     let expArea = "East Hampshire";
-    let expDescSum = "Approximate crash site of aircraft T2574";
+    let expDescSum = "/";
     let expDescFull =
-      "640 bundles of leaflets were scattered in the Nanates area from 13,000 ft";
+      "/";
 
-    cy.log("**** Navigate to Warden ****");
-    hgAction.navigateToWardenRecord(hobUid);
+    hgAction.navigateToRecord(hobUid);
 
     hgAction.verifyLabelPresent();
-    cy.log("**** Verify warden aircraft record description ****");
-    hgAction.verifyWardenAircraftRecord(
+    cy.log("**** Verify aircraft record description ****");
+    hgAction.verifyAircraftRecord(
       hobUid,
       expCounty,
       expCivParName,
@@ -178,15 +176,15 @@ describe("Tests cover different functionalities across heritage gateway", () => 
     );
   });
 
-  it("@23618: HGWS: Searching for Maritime in HG returns the same results in Warden", () => {
+  it("@23618: HGWS: Searching for Maritime in HG returns the same results", () => {
     let hobUid = "911909";
-    let title = "James Groves";
+    let title = "/";
     let location = "East Sussex";
     let location2 = "Rother";
 
-    let descSum = "Remains of the 1876 wreck";
+    let descSum = "Remains of the wreck";
     let descFull =
-      "640 bundles of leaflets were scattered in the Nanates area from 13,000 ft";
+      "";
 
     cy.log("**** Navigate to HG record ****");
     hgAction.navigateToHgMaritimeRecord(hobUid, title);
@@ -201,19 +199,18 @@ describe("Tests cover different functionalities across heritage gateway", () => 
     );
   });
 
-  it("@23618: Maritime - HG returns the same results in Warden", () => {
+  it("@23618: Maritime - HG returns the same results", () => {
     let hobUid = "911909";
-    let title = "James Groves";
+    let title = "/";
     let expCounty = "East Sussex";
     let expDisc = "Rother";
-    let expDescSum = "Remains of the 1876 wreck";
+    let expDescSum = "/";
 
-    cy.log("**** Navigate to Warden *****");
-    hgAction.navigateToWardenRecord(hobUid);
+    hgAction.navigateToRecord(hobUid);
     hgAction.verifyLabelPresent();
 
-    cy.log("**** Verify warden maritime record description ****");
-    hgAction.verifyWardenMaritimeRecord(
+    cy.log("**** Verify maritime record description ****");
+    hgAction.verifyMaritimeRecord(
       title,
       hobUid,
       expCounty,
