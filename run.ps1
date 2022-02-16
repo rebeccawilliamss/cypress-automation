@@ -1,1 +1,0 @@
-cd "C:\Users\TPawlak\Documents\WardenAutomation\_work\3\s"; npm test;
