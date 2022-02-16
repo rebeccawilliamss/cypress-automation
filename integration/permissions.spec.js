@@ -15,7 +15,7 @@ describe('Users with different permissions have correct levels of access', () =>
         Cypress.Cookies.preserveOnce(
         'ai_session',
         'csrftoken',
-        'warden',
+        '/',
         'ai_user');
 
         cy.viewport(1600, 1200);
@@ -24,7 +24,7 @@ describe('Users with different permissions have correct levels of access', () =>
     it('can login as a provisional user and edit a record but not save it', () => {
 
         cy.visit('/');
-        cy.login({ username: 'provisional_user', password: '!ProvisionalTest1'});
+        cy.login({ username: '/', password: '/'});
 
         cy.xpath(home.manageDataBtn)
         .invoke('removeAttr','target')
@@ -55,8 +55,8 @@ describe('Users with different permissions have correct levels of access', () =>
     it('can login as a reviewer user and save the edits made by provisional user', () => {
 
         cy.log('**** login as a reviewer user ****')
-        cy.get('#username').type('reviewer_user');
-        cy.get('#password').type('!ReviewTest1');
+        cy.get('#username').type('/');
+        cy.get('#password').type('/');
         cy.get('button').contains('Sign In').click();
         cy.xpath(home.searchBtn).click();
 
