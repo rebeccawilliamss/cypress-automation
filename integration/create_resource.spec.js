@@ -9,7 +9,7 @@ describe('Create resource functionalities',function(){
 
     beforeEach(()=>{
 
-        Cypress.Cookies.preserveOnce('ai_session', 'csrftoken','warden','ai_user');
+        Cypress.Cookies.preserveOnce('ai_session', 'csrftoken','/','ai_user');
         cy.viewport(1600, 1200);
     })
 
