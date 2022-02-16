@@ -1,6 +1,6 @@
 {
     "chromeWebSecurity": false,
-    "baseUrl": "https://stage-warden.historicengland.org.uk/",
+    "baseUrl": "/",
     "reporter":"cypress-multi-reporters",
     "reporterOptions":{
         "reporterEnabled":"mochawesome",
